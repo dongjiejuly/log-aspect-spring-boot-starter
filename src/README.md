@@ -23,20 +23,23 @@
 
 ### 测试
 代码完成开发，需要使用maven install安装到本地，然后在其他项目中导入pom依赖即可进行验证
+
+导入pom依赖
 ```xml
 <dependency>
-    <groupId>org.yanzige.starter</groupId>
-    <artifactId>show-spring-boot-starter</artifactId>
+    <groupId>org.yanzige.log</groupId>
+    <artifactId>log-aspect-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
 
 ## 总结
 编写starter功能的顺序
-- 先编写对应配置文件读取的配置类 ShowProperties
-- 实现拦截器需要实现的拦截功能 ShowInfoInterceptor
-- 编写拦截器的配置类 WebConfig，该配置类需要将需要使用到的bean实例注入到容器，并且将自定义拦截器添加到Spring的拦截器中
-- 因为当前编写Starter功能需要提供给其他项目使用，所以当前Starter中的所有组件需要被正确的扫描到，所以需要需要配置正确的扫描路径，并且需要配置相应starter启动的条件
+- 先编写对应配置文件读取的配置类 LogProperties
+- 自定义注解Log
+- 编写切面类LogAspect，实现需要的切面功能
+- 编写启动配置类 LogAspectEnableAutoConfiguration，将所有需要的组件被正确的扫描，并配置正确的扫描路径，最后配置相应starter启动的条件
+- 编写文件 spring.factories 
 - 在其他项目只引用pom依赖 + 在配置文件中添加相应的配置以开启starter功能
 
 注：参考总结来源于网络 https://www.bilibili.com/video/BV18X4y1z73R/?spm_id_from=333.337.search-card.all.click&vd_source=5f9e6b35dbb163280676b2a0be0142e9
